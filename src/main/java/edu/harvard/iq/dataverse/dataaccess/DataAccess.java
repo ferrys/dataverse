@@ -36,7 +36,6 @@ public class DataAccess {
 
     // set by the user in glassfish-setup.sh if DEFFAULT_STORAGE_DRIVER_IDENTIFIER = swift
     public static final String DEFAULT_STORAGE_DRIVER_IDENTIFIER = System.getProperty("dataverse.files.storage-driver-id");
-    public static String swiftFileUri;
 
     // The getDataFileIO() methods initialize DataFileIO objects for
     // datafiles that are already saved using one of the supported Dataverse
@@ -106,16 +105,7 @@ public class DataAccess {
         return dataFileIO;
     }
 
-    public static String getSwiftFileURI(StoredObject fileObject) throws IOException {
-        String fileUri;
-        try {
-            fileUri = fileObject.getPublicURL();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new IOException("SwiftAccessIO: failed to get file storage location");
-        }
-        return fileUri;
-    }
+
 
 
 

@@ -29,6 +29,7 @@ public class SwiftAccessIO extends DataFileIO {
 
     private String swiftFolderPath;
     private String swiftFileName = null;
+    private String swiftFileUri;
 
     private static final Logger logger = Logger.getLogger("edu.harvard.iq.dataverse.dataaccess.SwiftAccessIO");
 
@@ -322,10 +323,10 @@ public class SwiftAccessIO extends DataFileIO {
 
         StoredObject fileObject = dataContainer.getObject(swiftFileName);
         //file download url for public files
-        DataAccess.swiftFileUri = DataAccess.getSwiftFileURI(fileObject);
-        setRemoteUrl(DataAccess.getSwiftFileURI(fileObject));
+        swiftFileUri = getSwiftFileURI(fileObject);
+        setRemoteUrl(getSwiftFileURI(fileObject));
 
-        logger.info(DataAccess.swiftFileUri + " success");
+        logger.info(swiftFileUri + " success");
 
         if (!writeAccess && !fileObject.exists()) {
             throw new IOException("SwiftAccessIO: File object " + swiftFileName + " does not exist (Dataverse datafile id: " + this.getDataFile().getId());
@@ -427,6 +428,17 @@ public class SwiftAccessIO extends DataFileIO {
 
         // By default, we open the file in read mode:
         return false;
+    }
+
+    private String getSwiftFileURI(StoredObject fileObject) throws IOException {
+        String fileUri;
+        try {
+            fileUri = fileObject.getPublicURL();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IOException("SwiftAccessIO: failed to get file storage location");
+        }
+        return fileUri;
     }
 
 }
