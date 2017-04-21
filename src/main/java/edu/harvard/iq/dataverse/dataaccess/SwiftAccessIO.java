@@ -312,8 +312,15 @@ public class SwiftAccessIO extends DataFileIO {
 
         if (!dataContainer.exists()) {
             if (writeAccess) {
-                dataContainer.create();
-                //dataContainer.makePublic();
+                // dataContainer.create();
+                try {
+                    //creates a public data container
+                    dataContainer.makePublic();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                    logger.info("Creating dataContainer failed");
+                }
             } else {
                 // This is a fatal condition - it has to exist, if we were to 
                 // read an existing object!
