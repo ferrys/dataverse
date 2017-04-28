@@ -97,7 +97,7 @@
                         </h:outputLink>
 
                         <!-- COMPUTE BUTTON -->
-                        <h:outputLink value="" type="button" class="btn btn-default" rendered="#{DatasetPage.isSwiftStorage()}"><span class="glyphicon glyphicon-flash"/> #{bundle['file.compute']}
+                        <h:outputLink value="https://giji.massopencloud.org/application/dataverse/jobs?containerName=#{DatasetPage.getSwiftContainerName()}" type="button" class="btn btn-default" rendered="#{DatasetPage.isSwiftStorage()}"><span class="glyphicon glyphicon-flash"/> #{bundle['file.compute']}
                         </h:outputLink>
 
                     </div>
