@@ -354,7 +354,7 @@ public class DatasetPage implements java.io.Serializable {
 
     public String getSwiftContainerName(){
         String swiftContainerName = null;
-        String swiftFolderPathSeparator = "_";
+        String swiftFolderPathSeparator = "-";
         if (persistentId != null) {
             dataset = datasetService.findByGlobalId(persistentId); 
             String authorityNoSlashes = dataset.getAuthority().replace(dataset.getDoiSeparator(), swiftFolderPathSeparator);
@@ -386,6 +386,10 @@ public class DatasetPage implements java.io.Serializable {
             }
         }
         return swiftBool;
+    }
+
+    public String getComputeUrl() {
+        return settingsService.getValueForKey(SettingsServiceBean.Key.ComputeBaseUrl) + getSwiftContainerName();
     }
     
     public DataFile getSelectedDownloadFile() {
