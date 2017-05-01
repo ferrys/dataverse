@@ -634,6 +634,7 @@ Dataverse calculates checksums for uploaded files so that users can determine if
 
 The default checksum algorithm used is MD5 and should be sufficient for establishing file fixity. "SHA-1" is an experimental alternate value for this setting.
 
+
 :ShibPassiveLoginEnabled
 ++++++++++++++++++++++++
 
@@ -648,3 +649,10 @@ It is recommended that you configure additional error handling for your Service 
 You can set the value of "#THIS PAGE#" to the url of your Dataverse homepage, or any other page on your site that is accessible to anonymous users and will have the isPassive.js file loaded.
 
 ``curl -X PUT -d true http://localhost:8080/api/admin/settings/:ShibPassiveLoginEnabled``
+
+:ComputeBaseUrl
++++++++++++++++
+
+Set the base URL for the "Compute" button for a dataset.
+
+``curl -X PUT -d 'https://giji.massopencloud.org/application/dataverse?containerName=' http://localhost:8080/api/admin/settings/:ComputeBaseUrl``
